@@ -1,38 +1,58 @@
 package pj;
-
 import java.util.Scanner;
 
 public class MayTinhDonGian {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
+        boolean tiepTuc = true;
 
-        System.out.print("Nhập số thứ nhất: ");
-        double a = sc.nextDouble();
+        System.out.println("=== Máy Tính Đơn Giản ===");
 
-        System.out.print("Nhập phép tính (+, -, *, /): ");
-        char op = sc.next().charAt(0);
+        while (tiepTuc) {
+            System.out.print("Nhập số thứ nhất: ");
+            double a = scanner.nextDouble();
 
-        System.out.print("Nhập số thứ hai: ");
-        double b = sc.nextDouble();
+            System.out.print("Nhập số thứ hai: ");
+            double b = scanner.nextDouble();
 
-        double kq = 0;
-        switch (op) {
-            case '+': kq = a + b; break;
-            case '-': kq = a - b; break;
-            case '*': kq = a * b; break;
-            case '/': 
-                if (b != 0) kq = a / b;
-                else {
-                    System.out.println("Lỗi: chia cho 0");
-                    return;
-                }
-                break;
-            default:
-                System.out.println("Phép tính không hợp lệ");
-                return;
+            System.out.print("Chọn phép toán (+, -, *, /): ");
+            char operator = scanner.next().charAt(0);
+
+            double result;
+
+            switch (operator) {
+                case '+':
+                    result = a + b;
+                    break;
+                case '-':
+                    result = a - b;
+                    break;
+                case '*':
+                    result = a * b;
+                    break;
+                case '/':
+                    if (b == 0) {
+                        System.out.println("❌ Lỗi: Không thể chia cho 0.");
+                        continue; // Bỏ qua vòng hiện tại và tiếp tục
+                    }
+                    result = a / b;
+                    break;
+                default:
+                    System.out.println("❌ Phép toán không hợp lệ.");
+                    continue;
+            }
+
+            System.out.println("✅ Kết quả: " + result);
+
+            // Hỏi người dùng có muốn tiếp tục không
+            System.out.print("Bạn có muốn tiếp tục? (c/k): ");
+            char choice = scanner.next().toLowerCase().charAt(0);
+            if (choice != 'c') {
+                tiepTuc = false;
+            }
         }
 
-        System.out.println("Kết quả: " + kq);
-        System.out.println("\nKet thuc chuong trinh");
+        System.out.println("🔚 Kết thúc chương trình. Cảm ơn bạn!");
+        scanner.close();
     }
 }
